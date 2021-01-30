@@ -82,34 +82,33 @@ export default {
             alert('Password not matched');
           }
           else{
-            console.log(this.name);
-            console.log(this.pass);
+            fetch("http://35.208.131.201:3000/admin/", {
+              method: "POST",
+              headers:{
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify({
+                email:this.uid,
+                password:this.pass
+              }),
+              
+            })
+            .then(res => res.json())
+            .then(data => {
+              console.log(data);
+              localStorage.jwt = data.token;
+              localStorage.docEmail = this.uid;
+              localStorage.docPass = this.pass;
+              localStorage.docName= data.doctor.name;
+              localStorage.docSpecs = data.doctor.Specialization;
+              localStorage.docID = data.doctor._id;
+              this.$router.push('profile/patient');
+            })
+            .catch(() => {
+              alert("Invalid inputs");
+            });
           }
-          // fetch("https://health-care-auto.herokuapp.com/api/doctor/login", {
-          //   method: "POST",
-          //   headers:{
-          //     "Content-Type": "application/json"
-          //   },
-          //   body: JSON.stringify({
-          //     email:this.uid,
-          //     password:this.pass
-          //   }),
-            
-          // })
-          // .then(res => res.json())
-          // .then(data => {
-          //   console.log(data);
-          //   localStorage.jwt = data.token;
-          //   localStorage.docEmail = this.uid;
-          //   localStorage.docPass = this.pass;
-          //   localStorage.docName= data.doctor.name;
-          //   localStorage.docSpecs = data.doctor.Specialization;
-          //   localStorage.docID = data.doctor._id;
-          //   this.$router.push('profile/patient');
-          // })
-          // .catch(() => {
-          //   alert("Invalid inputs");
-          // });
+          
           
         }
     }
