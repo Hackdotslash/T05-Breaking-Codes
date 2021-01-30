@@ -15,6 +15,7 @@ module.exports = (app)=>{
     const upd_doc               = require('./doctor/upd_doctor');
     const admin_login           = require('./admin/login');
     const get_admin_events      = require('./admin/get_admin_events');
+    const change_event_status   = require('./admin/change_event_status');
     /* VERIFY MAIL */
     app.post('/verify',verifyMail.VerifyMail);
     app.get('/verify/:token',verifyMail.verifyMailToken);
@@ -33,7 +34,7 @@ module.exports = (app)=>{
     /*MAIN APP ROUTES */
     app.post('/disease',diseasePredict.disease_predict);
     app.post('/getDoctors',comFun.jwtAuth,getDoctors.getDoctors);
-    app.post('/get_events',comFun.jwtAuth,get_events.getEvents);
+    app.post('/get_events',get_events.getEvents);
     /*MAIN APP ROUTES */
 
     /*DOCTOR APP ROUTE */
@@ -45,6 +46,7 @@ module.exports = (app)=>{
     /*ADMIN ROUTES */
     app.post('/admin/login',admin_login.adminLogin)
     app.post('/admin/get_events',comFun.adminAuth,get_admin_events.getEvents);
+    app.post('/admin/change_event_status',comFun.adminAuth,change_event_status.change_event_status)
     /*ADMIN ROUTES */
 
 
