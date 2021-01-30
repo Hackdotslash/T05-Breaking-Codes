@@ -1,6 +1,6 @@
 import 'dart:convert';
+import 'package:dotslash_hackathon/screens/fetch_data_screen.dart';
 import 'package:dotslash_hackathon/screens/forgot_password.dart';
-import 'package:dotslash_hackathon/screens/home_screen.dart';
 import 'package:dotslash_hackathon/screens/register_screen.dart';
 import 'package:dotslash_hackathon/utils/constants.dart';
 import 'package:dotslash_hackathon/utils/db_connection.dart';
@@ -138,7 +138,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     var output2 =
                                         jsonDecode(tokenResponse.body);
                                     await pref.setString(
-                                        "authToken", output2['token']);
+                                        authToken, output2['token']);
 
                                     await pref.setString(
                                         kStatusText, "Logged in");
@@ -146,7 +146,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                HomeScreen()));
+                                                FetchData()));
                                   }
                                 }
                               } else {

@@ -1,8 +1,8 @@
 import 'package:dotslash_hackathon/models/User.dart';
+import 'package:dotslash_hackathon/utils/constants.dart';
 import 'package:http/http.dart' as http;
 
 class DBConnections {
-  static const dynamic homeUrl = 'http://35.208.131.201:3000/';
   Future verifyUser(String email, String password) async {
     var url = homeUrl + 'login';
     var response = await http.post(url,
