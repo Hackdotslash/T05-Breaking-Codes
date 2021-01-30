@@ -11,7 +11,10 @@ module.exports = (app)=>{
     const getDoctors            = require('./getDoctors');
     const add_event             = require('./doctor/add_event');
     const get_events            = require('./getEvents');
+    const get_doc_events        = require('./doctor/get_doc_events');
     const upd_doc               = require('./doctor/upd_doctor');
+    const admin_login           = require('./admin/login');
+    const get_admin_events      = require('./admin/get_admin_events');
     /* VERIFY MAIL */
     app.post('/verify',verifyMail.VerifyMail);
     app.get('/verify/:token',verifyMail.verifyMailToken);
@@ -36,10 +39,12 @@ module.exports = (app)=>{
     /*DOCTOR APP ROUTE */
     app.post('/doctor/add_event',comFun.jwtAuth,add_event.add_event);
     app.post('/doctor/upd_doc',comFun.jwtAuth,upd_doc.upd_doc);
+    app.post('/doctor/get_events',comFun.jwtAuth,get_doc_events.get_doc_events)
     /*DOCTOR APP ROUTE */
 
     /*ADMIN ROUTES */
-
+    app.post('/admin/login',admin_login.adminLogin)
+    app.post('/admin/get_events',comFun.adminAuth,get_admin_events.getEvents);
     /*ADMIN ROUTES */
 
 

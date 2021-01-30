@@ -97,7 +97,7 @@ let self = module.exports = {
             let a = jwt.decode(token,"Secret11")
             console.log(a);
             console.log(Date.now())
-            if(a.expiry_date>self.getCurrTime() && a.secret === "Untangle11"){
+            if(a.expiry_date>self.getCurrTime() && a.secret === "ss"){
                 return next();
             }else {
                 res.json({success:0,message:"Incorrect Hit"})
