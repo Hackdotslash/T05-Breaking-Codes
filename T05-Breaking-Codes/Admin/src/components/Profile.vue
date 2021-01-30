@@ -5,7 +5,7 @@
             app
         >
             <v-list dense>
-                <router-link to="/profile/patient" tag="v-list-item">
+                <router-link to="/admin/patient" tag="v-list-item">
                     <v-list-item link>
                         <v-list-item-action>
                         <v-icon>mdi-account</v-icon>
@@ -25,7 +25,7 @@
                         </v-list-item-content>
                     </v-list-item>
                 
-                <router-link to="/profile/event" tag="v-list-item">
+                <router-link to="/admin/event" tag="v-list-item">
                     <v-list-item link>
                         <v-list-item-action>
                         <v-icon>mdi-book</v-icon>
@@ -35,7 +35,7 @@
                         </v-list-item-content>
                     </v-list-item>
                 </router-link>
-                <router-link to="/profile/diary" tag="v-list-item">
+                <router-link to="/admin/diary" tag="v-list-item">
                     <v-list-item link>
                         <v-list-item-action>
                         <v-icon>mdi-notebook</v-icon>
@@ -45,7 +45,7 @@
                         </v-list-item-content>
                     </v-list-item>
                 </router-link>
-                <router-link to="/profile/diary" tag="v-list-item">
+                <router-link to="/admin/diary" tag="v-list-item">
                     <v-list-item link>
                         <v-list-item-action>
                         <v-icon>mdi-domain</v-icon>
@@ -71,9 +71,9 @@
             dark
         >
             <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-            <v-toolbar-title>Doctor Portal - Secure Health</v-toolbar-title>
+            <v-toolbar-title>Admin Portal - Secure Health</v-toolbar-title>
             <v-spacer></v-spacer>
-            <v-toolbar-title class="pr-2">Welcome, Dr. {{ docName }}</v-toolbar-title>
+            <v-toolbar-title class="pr-2">Welcome Admin</v-toolbar-title>
 
         </v-app-bar>
         <router-view></router-view>

@@ -3,50 +3,23 @@
         <div class="container" style="padding-bottom:0!important;">
           <div class="row justify-content-center" style="padding-bottom:0!important;">
             
-            <div class="col-md-6" style="padding-bottom:0!important;">
+            <div class="col-md-4" style="padding-bottom:0!important;">
               <br><br>
-              <h4 class="text-center">Doctor Portal - Secure Health</h4>
+              <h4 class="text-center">Admin Portal - Secure Health</h4>
               <!-- Start Sign In Form -->
               <form action="#" class="fh5co-form animate-box" data-animate-effect="fadeIn">
-                <h2>Sign Up</h2>
-                <div class="form-group">
-                  <label for="name" class="sr-only">Name</label>
-                  <input type="text" v-model="name" class="form-control" id="name" placeholder="Name" autocomplete="off">
-                </div>
+                <h2>Sign In</h2>
                 <div class="form-group">
                   <label for="email" class="sr-only">Email</label>
-                  <input type="email" v-model="email" class="form-control" id="email" placeholder="Email" autocomplete="off">
-                </div>
-                <div class="form-group">
-                  <label for="contact" class="sr-only">Contact</label>
-                  <input type="text" v-model="contact" class="form-control" id="contact" placeholder="Contact" autocomplete="off">
-                </div>
-                <div class="form-group">
-                  <label for="specialization" class="sr-only">Specialization</label>
-                  <input type="text" v-model="spec" class="form-control" id="specialization" placeholder="Specialization" autocomplete="off">
-                </div>
-                <div class="form-group">
-                  <label for="address" class="sr-only">Address</label>
-                  <input type="text" v-model="address" class="form-control" id="address" placeholder="Address" autocomplete="off">
-                </div>
-                <div class="form-group">
-                  <label for="pin" class="sr-only">Pin code</label>
-                  <input type="text" v-model="pin" class="form-control" id="pin" placeholder="Postal Pin code" autocomplete="off">
+                  <input type="text" v-model="email" class="form-control" id="email" placeholder="Email" autocomplete="off">
                 </div>
                 <div class="form-group">
                   <label for="password" class="sr-only">Password</label>
                   <input type="password" v-model="pass" class="form-control" id="password" placeholder="Password" autocomplete="off">
                 </div>
-                <div class="form-group">
-                  <label for="password2" class="sr-only">Re-type Password</label>
-                  <input type="password" v-model="pass2" class="form-control" id="password2" placeholder="Re-type Password" autocomplete="off">
-                </div>
-                <div class="form-group">
-                  <p>Already registered? <span @click="navSignup" style="color: black;cursor: pointer;">Sign In</span></p>
-                </div>
                 <br><br>
                 <div class="form-group">
-                  <center><input type="button" value="Sign Up" @click="signup" class="btn btn-primary"></center>
+                  <center><input type="button" @click="login" value="Sign In" class="btn btn-primary"></center>
                 </div>
               </form>
               <br><br>
@@ -62,80 +35,61 @@ export default {
     data: () => ({
         Logo: Logo,
         email: '',
-        pass: '',
-        pass2: '',
-        contact: '',
-        name: '',
-        spec: '',
-        address: '',
-        pin: ''
+        pass: ''
     }),
     methods: {
-        navSignup(){
-          this.$router.push('/');
-        },
-        signup()
+        login()
         {
-          
-          if(this.pass != this.pass2)
-          {
-            alert('Password not matched');
-          }
-          else{
-            fetch("http://35.208.131.201:3000/doctor/signup", {
+          fetch("http://35.208.131.201:3000/doctor/login", {
+            method: "POST",
+            headers:{
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              email:this.email,
+              password:this.pass
+            }),
+            
+          })
+          .then(res => res.json())
+          .then(data => {
+            console.log(data);
+            console.log(data.token);
+            fetch(`http://35.208.131.201:3000/doctor/genTokenAndUserData`, {
               method: "POST",
-              headers:{
+              headers: {
                 "Content-Type": "application/json"
               },
               body: JSON.stringify({
-                email:this.email,
-                password:this.pass,
-                contact: this.contact,
-                address: this.address,
-                name : this.name,
-                specialization: this.spec,
-                pincode: this.pin
-              }),
+                token: data.token
+              })
+            })
+            .then(res2 => res2.json())
+            .then(data2 => {
+              console.log(data2);
+              localStorage.jwt = data2.token;
+              localStorage.docName = data2.user.name;
+              localStorage.docSpec = data2.user.specialization;
+              localStorage.docPincode = data2.user.pincode;
+              localStorage.contact = data2.user.contact;
+              localStorage.docEmail = data2.user.local.email;
+              localStorage.docAddr = data2.user.address;
+              this.$router.push('/admin/patient');
+            })
               
-            })
-            .then(res => res.json())
-            .then(data => {
-              console.log(data.token);
-                fetch(`http://35.208.131.201:3000/doctor/genTokenAndUserData`, {
-                  method: "POST",
-                  headers: {
-                    "Content-Type": "application/json"
-                  },
-                  body: JSON.stringify({
-                    token: data.token
-                  })
-                })
-                .then(res2 => res2.json())
-                .then(data2 => {
-                  console.log(data2);
-                  localStorage.jwt = data2.token;
-                  localStorage.docName = data2.user.name;
-                  localStorage.docSpec = data2.user.specialization;
-                  localStorage.docPincode = data2.user.pincode;
-                  localStorage.contact = data2.user.contact;
-                  localStorage.docEmail = data2.user.local.email;
-                  localStorage.docAddr = data2.user.address;
-                  this.$router.push('profile/patient');
-                })
-              // localStorage.jwt = data.token;
-              // localStorage.docEmail = this.uid;
-              // localStorage.docPass = this.pass;
-              // localStorage.docName= data.doctor.name;
-              // localStorage.docSpecs = data.doctor.Specialization;
-              // localStorage.docID = data.doctor._id;
-              // this.$router.push('profile/patient');
-            })
-            .catch(() => {
-              alert("Invalid inputs");
-            });
-          }
-          
-          
+            // localStorage.jwt = data.token;
+            // localStorage.docEmail = this.uid;
+            // localStorage.docPass = this.pass;
+            // localStorage.docName= data.doctor.name;
+            // localStorage.docSpecs = data.doctor.Specialization;
+            // localStorage.docID = data.doctor._id;
+            // this.$router.push('profile/patient');
+          })
+          .catch(() => {
+            alert("Invalid inputs");
+          });
+          console.log(this.uid);
+          console.log(this.pass);
         }
     }
 }
