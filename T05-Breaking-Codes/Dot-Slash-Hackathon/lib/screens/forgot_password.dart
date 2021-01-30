@@ -23,7 +23,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          'Heading',
+          'Reset password',
           style: kHeaderTextStyle,
         ),
       ),
