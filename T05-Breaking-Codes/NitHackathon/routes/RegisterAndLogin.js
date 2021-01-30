@@ -81,6 +81,7 @@ app.get('/logout', function (req, res) {
 });
 
 app.post('/doctor/genTokenAndUserData',(req,res)=>{
+	console.log(req.body);
 	let bodyToken = req.body.token
 	let decipher = crypto.createDecipher('aes256',"Secret");
 	let decrypted = decipher.update(bodyToken, 'hex', 'utf8') + decipher.final('utf8');
@@ -88,8 +89,8 @@ app.post('/doctor/genTokenAndUserData',(req,res)=>{
 		userId:decrypted,
 		expiry_date:moment().add(1,"week").format("YYYY-MM-DDTHH:mm:ss.SSS")
 	}
-	let token = jwt.verify(obj,"Secret");
-	UserModel.findOne({_id:decrypted},function(err,data){
+	let token = jwt.sign(obj,"Secret");
+	DoctorModel.findOne({_id:decrypted},function(err,data){
 		if(err){
 			console.log('Error',err);
 			res.json({success:0,message:"Error"})
@@ -111,13 +112,13 @@ app.post('/genTokenAndUserData',(req,res)=>{
 		userId:decrypted,
 		expiry_date:moment().add(1,"week").format("YYYY-MM-DDTHH:mm:ss.SSS")
 	}
-	let token = jwt.verify(obj,"Secret");
-	DoctorModel.findOne({_id:decrypted},function(err,data){
+	let token = jwt.sign(obj,"Secret");
+	UserModel.findOne({_id:decrypted},function(err,data){
 		if(err){
 			console.log('Error',err);
 			res.json({success:0,message:"Error"})
 		}else if(!comFun.NotNullUndef(data)){
-			console.log('Error',err);
+			console.log('DATA',data)
 			res.json({success:0,message:"Error"})
 		}else {
 			res.json({success:1,message:"Success",user:data,token:token});
