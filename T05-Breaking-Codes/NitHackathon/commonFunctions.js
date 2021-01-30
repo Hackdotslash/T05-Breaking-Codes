@@ -105,6 +105,26 @@ let self = module.exports = {
         }else {
             res.json({success:0,message:"Incorrect Hit"})
         }
-    }
+    },
+    ArrVal: function (v) {
+        let type = typeof v;
+        if(type === 'undefined') {
+            return false;
+        }
+        if(v === null) {
+            return false;
+        }
+        if(v === undefined) {
+            return false;
+        }
+        if(v instanceof Array) {
+            if(v.length < 1) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+        return false;
+    },
 
 }
