@@ -11,11 +11,11 @@
                 <h2>Sign In</h2>
                 <div class="form-group">
                   <label for="email" class="sr-only">Email</label>
-                  <input type="text" class="form-control" id="email" placeholder="Email" autocomplete="off">
+                  <input type="text" v-model="email" class="form-control" id="email" placeholder="Email" autocomplete="off">
                 </div>
                 <div class="form-group">
                   <label for="password" class="sr-only">Password</label>
-                  <input type="password" class="form-control" id="password" placeholder="Password" autocomplete="off">
+                  <input type="password" v-model="pass" class="form-control" id="password" placeholder="Password" autocomplete="off">
                 </div>
                 <div class="form-group">
                   <p>Not registered? <span @click="navSignup" style="color: black;cursor: pointer;">Sign Up</span></p>
@@ -37,7 +37,7 @@ export default {
     name: 'login',
     data: () => ({
         Logo: Logo,
-        uid: '',
+        email: '',
         pass: ''
     }),
     methods: {
@@ -46,13 +46,13 @@ export default {
         },
         login()
         {
-          fetch("https://health-care-auto.herokuapp.com/api/doctor/login", {
+          fetch("http://35.208.131.201:3000/admin/login", {
             method: "POST",
             headers:{
               "Content-Type": "application/json"
             },
             body: JSON.stringify({
-              email:this.uid,
+              username:this.email,
               password:this.pass
             }),
             
