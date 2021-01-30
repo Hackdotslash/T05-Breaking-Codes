@@ -27,7 +27,7 @@ class _LoginScreenState extends State<LoginScreen> {
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          'Heading',
+          'Login',
           style: kHeaderTextStyle,
         ),
       ),

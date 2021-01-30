@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class DoctorInfo extends StatefulWidget {
   @override
@@ -19,16 +20,7 @@ class _DoctorInfoState extends State<DoctorInfo> {
   Future<List> getDoctors() async {
     List<Doctor> doctorList = List();
     List<Map> dynamicList;
-    var db = await openDatabase(
-      'dotslash.db',
-      version: 1,
-      onCreate: (Database db, int version) async {
-        await db.execute(
-            'CREATE TABLE Doctors (id INTEGER PRIMARY KEY, name TEXT, contact INTEGER, specialization TEXT, address TEXT, pincode INTEGER)');
-        await db.execute(
-            'CREATE TABLE Events (id INTEGER PRIMARY KEY, eventTitle TEXT, location TEXT, date TEXT, time TEXT, eventDescription TEXT)');
-      },
-    );
+    var db = await openDatabase('dotslash.db');
     dynamicList = await db.rawQuery('SELECT * FROM Doctors');
     dynamicList.forEach((element) {
       doctorList.add(Doctor(
@@ -38,6 +30,7 @@ class _DoctorInfoState extends State<DoctorInfo> {
           contact: element['contact'],
           pinCode: element['pincode']));
     });
+    db.close();
     return doctorList;
   }
 
@@ -72,7 +65,7 @@ class _DoctorInfoState extends State<DoctorInfo> {
                 },
                 style: kTextFieldStyle,
                 decoration: InputDecoration(
-                  hintText: 'Enter a pincode',
+                  hintText: 'Enter pincode',
                   suffixIcon: IconButton(
                     icon: Icon(
                       Icons.clear,
@@ -101,11 +94,18 @@ class _DoctorInfoState extends State<DoctorInfo> {
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20)),
                           child: ListTile(
-                            title: Text(
-                              "Doctor's name: " + doctors[index].name,
+                            title: Row(
+                              children: [
+                                Text("doctorName").tr(),
+                                Text(doctors[index].name)
+                              ],
                             ),
-                            subtitle: Text(
-                                "Doctor's Address: " + doctors[index].address),
+                            subtitle: Row(
+                              children: [
+                                Text("doctorAddress").tr(),
+                                Text(doctors[index].address)
+                              ],
+                            ),
                             trailing: IconButton(
                               icon: Icon(Icons.phone),
                               onPressed: () async {
@@ -133,12 +133,18 @@ class _DoctorInfoState extends State<DoctorInfo> {
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(20)),
                               child: ListTile(
-                                title: Text(
-                                  "Doctor's name: " +
-                                      suggestionsList[index].name,
+                                title: Row(
+                                  children: [
+                                    Text("doctorName").tr(),
+                                    Text(doctors[index].name)
+                                  ],
                                 ),
-                                subtitle: Text("Doctor's Address: " +
-                                    suggestionsList[index].address),
+                                subtitle: Row(
+                                  children: [
+                                    Text("doctorAddress").tr(),
+                                    Text(doctors[index].address)
+                                  ],
+                                ),
                                 trailing: IconButton(
                                   icon: Icon(Icons.phone),
                                   onPressed: () async {

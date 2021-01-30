@@ -9,13 +9,6 @@ class CheckConnectivity extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Rural Health Care',
-          style: kHeaderTextStyle,
-        ),
-        centerTitle: true,
-      ),
       body: Builder(
         builder: (BuildContext context) {
           return OfflineBuilder(

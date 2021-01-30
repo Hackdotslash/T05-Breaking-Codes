@@ -2,6 +2,7 @@ import 'package:dotslash_hackathon/models/Event.dart';
 import 'package:dotslash_hackathon/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class EventPage extends StatefulWidget {
   @override
@@ -38,6 +39,7 @@ class _EventPageState extends State<EventPage> {
           location: element['location'],
           time: element['time']));
     });
+    db.close();
     return eventList;
   }
 
@@ -101,19 +103,44 @@ class _EventPageState extends State<EventPage> {
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20)),
                           child: ListTile(
-                            title: Text(
-                              "Event's name: " + events[index].eventTitle,
+                            title: Row(
+                              children: [
+                                Text(
+                                  "eventName",
+                                ).tr(),
+                                Text(events[index].eventTitle)
+                              ],
                             ),
                             subtitle: Column(
                               children: [
-                                Text(
-                                  "Event description: " +
-                                      events[index].eventDescription,
-                                  textAlign: TextAlign.left,
+                                Row(
+                                  children: [
+                                    Text(
+                                      "eventDescription",
+                                      textAlign: TextAlign.left,
+                                    ).tr(),
+                                    Flexible(
+                                      fit: FlexFit.loose,
+                                      child: Text(
+                                        events[index].eventDescription,
+                                        textAlign: TextAlign.left,
+                                        softWrap: false,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    )
+                                  ],
                                 ),
-                                Text(
-                                  "Host Doctor: " + events[index].hostDoctor,
-                                  textAlign: TextAlign.left,
+                                Row(
+                                  children: [
+                                    Text(
+                                      "hostDoctor",
+                                      textAlign: TextAlign.left,
+                                    ).tr(),
+                                    Text(
+                                      events[index].hostDoctor,
+                                      textAlign: TextAlign.left,
+                                    )
+                                  ],
                                 ),
                                 Row(
                                   children: [
@@ -155,22 +182,38 @@ class _EventPageState extends State<EventPage> {
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(20)),
                               child: ListTile(
-                                title: Text(
-                                  "Event's name: " +
+                                title: Row(
+                                  children: [
+                                    Text("eventName").tr(),
+                                    Text(
                                       suggestionsList[index].eventTitle,
+                                    )
+                                  ],
                                 ),
                                 subtitle: Column(
                                   children: [
-                                    Text(
-                                      "Event description: " +
+                                    Row(
+                                      children: [
+                                        Text(
+                                          "eventDescription",
+                                          textAlign: TextAlign.left,
+                                        ).tr(),
+                                        Text(
                                           suggestionsList[index]
                                               .eventDescription,
-                                      textAlign: TextAlign.left,
+                                          textAlign: TextAlign.left,
+                                        )
+                                      ],
                                     ),
-                                    Text(
-                                      "Host Doctor: " +
-                                          suggestionsList[index].hostDoctor,
-                                      textAlign: TextAlign.left,
+                                    Row(
+                                      children: [
+                                        Text(
+                                          "hostDoctor",
+                                          textAlign: TextAlign.left,
+                                        ).tr(),
+                                        Text(suggestionsList[index].hostDoctor,
+                                            textAlign: TextAlign.left)
+                                      ],
                                     ),
                                     Row(
                                       children: [
