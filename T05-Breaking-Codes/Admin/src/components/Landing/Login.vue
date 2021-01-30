@@ -11,7 +11,7 @@
                 <h2>Sign In</h2>
                 <div class="form-group">
                   <label for="email" class="sr-only">Email</label>
-                  <input type="text" v-model="email" class="form-control" id="email" placeholder="Email" autocomplete="off">
+                  <input type="text" v-model="email" class="form-control" id="email" placeholder="Username" autocomplete="off">
                 </div>
                 <div class="form-group">
                   <label for="password" class="sr-only">Password</label>
@@ -40,56 +40,26 @@ export default {
     methods: {
         login()
         {
-          fetch("http://35.208.131.201:3000/doctor/login", {
+          fetch("http://35.208.131.201:3000/admin/login", {
             method: "POST",
             headers:{
               "Content-Type": "application/json"
             },
             body: JSON.stringify({
-              email:this.email,
-              password:this.pass
+              username: this.email,
+              password: this.pass
             }),
             
           })
           .then(res => res.json())
           .then(data => {
+            localStorage.jwt = data.token;
             console.log(data);
-            console.log(data.token);
-            fetch(`http://35.208.131.201:3000/doctor/genTokenAndUserData`, {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json"
-              },
-              body: JSON.stringify({
-                token: data.token
-              })
-            })
-            .then(res2 => res2.json())
-            .then(data2 => {
-              console.log(data2);
-              localStorage.jwt = data2.token;
-              localStorage.docName = data2.user.name;
-              localStorage.docSpec = data2.user.specialization;
-              localStorage.docPincode = data2.user.pincode;
-              localStorage.contact = data2.user.contact;
-              localStorage.docEmail = data2.user.local.email;
-              localStorage.docAddr = data2.user.address;
-              this.$router.push('/admin/patient');
-            })
-              
-            // localStorage.jwt = data.token;
-            // localStorage.docEmail = this.uid;
-            // localStorage.docPass = this.pass;
-            // localStorage.docName= data.doctor.name;
-            // localStorage.docSpecs = data.doctor.Specialization;
-            // localStorage.docID = data.doctor._id;
-            // this.$router.push('profile/patient');
+            this.$router.push('/admin/event')
           })
           .catch(() => {
             alert("Invalid inputs");
           });
-          console.log(this.uid);
-          console.log(this.pass);
         }
     }
 }

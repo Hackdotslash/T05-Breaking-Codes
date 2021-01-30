@@ -5,47 +5,28 @@
             app
         >
             <v-list dense>
-                <router-link to="/admin/patient" tag="v-list-item">
-                    <v-list-item link>
-                        <v-list-item-action>
-                        <v-icon>mdi-account</v-icon>
-                        </v-list-item-action>
-                        <v-list-item-content>
-                        <v-list-item-title>Patient Details</v-list-item-title>
-                        </v-list-item-content>
-                    </v-list-item>
-                </router-link>
                 
-                    <v-list-item link @click="revoke()">
-                        <v-list-item-action>
-                        <v-icon>mdi-logout</v-icon>
-                        </v-list-item-action>
-                        <v-list-item-content>
-                        <v-list-item-title>Revoke Patient</v-list-item-title>
-                        </v-list-item-content>
-                    </v-list-item>
-                
-                <router-link to="/admin/event" tag="v-list-item">
+                <router-link to="/admin/pending" tag="v-list-item">
                     <v-list-item link>
                         <v-list-item-action>
-                        <v-icon>mdi-book</v-icon>
+                        <v-icon>mdi-account-clock</v-icon>
                         </v-list-item-action>
                         <v-list-item-content>
-                        <v-list-item-title>Host an Event</v-list-item-title>
+                        <v-list-item-title>Pending Events</v-list-item-title>
                         </v-list-item-content>
                     </v-list-item>
                 </router-link>
-                <router-link to="/admin/diary" tag="v-list-item">
+                <router-link to="/admin/approved" tag="v-list-item">
                     <v-list-item link>
                         <v-list-item-action>
-                        <v-icon>mdi-notebook</v-icon>
+                        <v-icon>mdi-account-check</v-icon>
                         </v-list-item-action>
                         <v-list-item-content>
-                        <v-list-item-title>Personal Diary</v-list-item-title>
+                        <v-list-item-title>Approved Events</v-list-item-title>
                         </v-list-item-content>
                     </v-list-item>
                 </router-link>
-                <router-link to="/admin/diary" tag="v-list-item">
+                <!-- <router-link to="/admin/diary" tag="v-list-item">
                     <v-list-item link>
                         <v-list-item-action>
                         <v-icon>mdi-domain</v-icon>
@@ -54,7 +35,7 @@
                         <v-list-item-title>Jobs</v-list-item-title>
                         </v-list-item-content>
                     </v-list-item>
-                </router-link>
+                </router-link> -->
                 <v-list-item link @click="logout()">
                     <v-list-item-action>
                     <v-icon>mdi-lock</v-icon>
@@ -106,24 +87,6 @@ export default {
             localStorage.pAge = '';
             localStorage.pContact = '';
             localStorage.pID = '';
-        },
-        revoke()
-        {
-            fetch('https://health-care-auto.herokuapp.com/api/user/removeCurrentDoctor',{
-                method: 'POST',
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    userId: localStorage.pID
-                })
-            })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data);
-                this.$router.push('/');
-            })
-            
         }
     }
 }

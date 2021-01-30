@@ -7,7 +7,22 @@
                 </div>
                 <div class="col-md-12" v-if="isEvent">
                     <div class="row justify-content-center">
-                        <div class="col-md-6">
+                        <div class="col-md-6" v-for="event in docEvents" :key="event">
+                            <center><v-card class="" style="width:400px">
+                                <v-card-text style="color: #000">
+                                    <p class="text-center text--primary" style="font-weight:600">
+                                        {{event.title}}
+                                    </p>
+                                    <p class="text-center">{{ event.description }}</p>
+                                    
+                                    <div><strong>Location:</strong> {{ event.location }}</div>
+                                    <div><strong>Date:</strong> {{ event.date }}</div>
+                                    <div><strong>Time:</strong> {{ event.time }}</div>
+                                </v-card-text>
+                                
+                            </v-card></center>
+                        </div>
+                        <!-- <div class="col-md-6">
                             <center><v-card class="" style="width:400px">
                                 <v-card-text style="color: #000">
                                     <p class="text-center text--primary" style="font-weight:600">
@@ -36,22 +51,7 @@
                                 </v-card-text>
                                 
                             </v-card></center>
-                        </div>
-                        <div class="col-md-6">
-                            <center><v-card class="" style="width:400px">
-                                <v-card-text style="color: #000">
-                                    <p class="text-center text--primary" style="font-weight:600">
-                                        Blood donation drive
-                                    </p>
-                                    <p class="text-center">Blood donation drive at Borivali station on 3rd Feb, 2021</p>
-                                    
-                                    <div><strong>Location:</strong> Borivali station</div>
-                                    <div><strong>Date:</strong> 3rd Feb, 2021</div>
-                                    <div><strong>Time:</strong> 3pm onwards</div>
-                                </v-card-text>
-                                
-                            </v-card></center>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 <div class="col-md-12" v-else>
@@ -106,7 +106,8 @@
 export default {
     name: 'Event',
     data: () => ({
-        isEvent: true,
+        docEvents: [],
+        isEvent: false,
         showForm: false,
         date: '',
         menu: false,
@@ -120,7 +121,20 @@ export default {
     },
     methods: {
         loadEvent() {
-            // fetch(`http://35.208.131.201:3000/`)
+            fetch(`http://35.208.131.201:3000/doctor/get_events`, {
+                method: "POST",
+                headers: {
+                    "X-Auth-Token": localStorage.jwt
+                }
+            })
+            .then(res => res.json())
+            .then(data => {
+                if(data.events.length != 0) {
+                    this.docEvents = data.events;
+                    this.isEvent = true;
+                }   
+                console.log(data);
+            })
             console.log("Inside created");
         },
         addEvent()
@@ -154,6 +168,7 @@ export default {
                         this.time = '';
                         this.loc = '';
                         this.desc = '';
+                        this.loadEvent();
                         this.$router.push('/profile/event');
                     }
                 })

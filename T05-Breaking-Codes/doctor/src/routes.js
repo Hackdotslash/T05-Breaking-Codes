@@ -7,6 +7,8 @@ import Presc from './components/Presc'
 import Patient from './components/Patient'
 import Diary from './components/PersonalDiary'
 import past from './components/PastPresc'
+import Vaccine from './components/Vaccine'
+
 
 export const routes = [
     { path: '', component: Login },
@@ -17,6 +19,7 @@ export const routes = [
         { path: '/profile/event', component: Event },
         { path: '/profile/presc', component: Presc },
         { path:'/profile/diary', component: Diary },
-        { path: '/profile/past', component: past }
+        { path: '/profile/past', component: past },
+        { path: '/profile/vaccine', component: Vaccine },
     ] }
 ];
