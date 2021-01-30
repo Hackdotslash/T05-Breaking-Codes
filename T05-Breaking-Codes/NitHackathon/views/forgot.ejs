@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!--Bootstrap CDN-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <!--JQUERY UI-->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link
+            href="https://fonts.googleapis.com/css2?family=Lato:wght@300&family=Montserrat:wght@700&family=PT+Sans:wght@400;700&display=swap"
+            rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
+    <!-- Pixel Code for https://insights.entireweb.com/ -->
+    <script async src="https://insights.entireweb.com/pixel/DSXVLJTY5ASyMAqC"></script>
+    <!-- END Pixel Code -->
+    <!--  Font Awesome CDN-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Piedra">
+    <link rel="stylesheet" href="https://storage.googleapis.com/bechdaal_bucket/assets/css/headerStyles.css">
+    <link rel="stylesheet" href="https://storage.googleapis.com/bechdaal_bucket/assets/css/style.css">
+</head>
+
+<body>
+<link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/bechdaal_bucket/assets/css/forgotPass.css">
+<div class="container card" style="margin-top: 50px ;margin-bottom: 50px ;">
+    <div class="card-header">
+        <h4>Change Password</h4>
+    </div>
+    <div class="col-sm-6 col-sm-offset-3 mx-auto card-body  " >
+        <h5 class="text-center">Use the form below to change your password. Your password cannot be the same as your username.</h5>
+        <form action="http://35.208.131.201:3000/resetpassword" method="post" id="passwordForm">
+            <input type="hidden" name="id" value="<%= payload.id%>" />
+            <input type="hidden" name="token" value="<%=token%>" />
+            <input type="password" class="input-lg form-control" name="password" id="password1" placeholder="New Password" autocomplete="off" style="margin-top: 20px;">
+            <div class="row">
+                <div class="col-sm-6" style="margin-bottom: 20px;">
+                    <span id="8char" class="fas fa-times" style="color:#FF0004;"></span> 8 Characters Long<br>
+                    <span id="ucase" class="fas fa-times" style="color:#FF0004;"></span> One Uppercase Letter
+                </div>
+                <div class="col-sm-6">
+                    <span id="lcase" class="fas fa-times" style="color:#FF0004;"></span> One Lowercase Letter<br>
+                    <span id="num" class="fas fa-times" style="color:#FF0004;"></span> One Number
+                </div>
+            </div>
+            <input type="password" class="input-lg form-control" name="password2" id="password2" placeholder="Repeat Password" autocomplete="off">
+            <div class="row">
+                <div class="col-sm-12">
+                    <span id="pwmatch" class="fas fa-times" style="color:#FF0004;"></span> Passwords Match
+                </div>
+            </div>
+            <center><input type="submit" class="col-xs-12 btn btn-info btn-load btn-lg" data-loading-text="Changing Password..." value="Change Password" style="margin-top: 20px;"></center>
+        </form>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://storage.googleapis.com/bechdaal_bucket/assets/js/reset.js" charset="utf-8"></script>
+
