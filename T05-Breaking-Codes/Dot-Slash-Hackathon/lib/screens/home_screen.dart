@@ -16,7 +16,7 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          'App Name',
+          'Home Screen',
           style: kHeaderTextStyle,
         ),
         actions: [
