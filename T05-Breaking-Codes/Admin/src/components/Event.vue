@@ -120,7 +120,6 @@ export default {
     },
     methods: {
         loadEvent() {
-            // fetch(`http://35.208.131.201:3000/`)
             console.log("Inside created");
         },
         addEvent()
@@ -154,7 +153,7 @@ export default {
                         this.time = '';
                         this.loc = '';
                         this.desc = '';
-                        this.$router.push('/profile/event');
+                        this.$router.push('/admin/event');
                     }
                 })
         }
