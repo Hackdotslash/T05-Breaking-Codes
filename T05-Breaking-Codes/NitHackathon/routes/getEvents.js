@@ -1,5 +1,4 @@
 const Events = require('../models/events')
-const comFun = require('../commonFunctions')
 module.exports.getEvents = (req,res,next)=>{
     Events.aggregate([{
         $match:{status:1}
@@ -24,7 +23,19 @@ module.exports.getEvents = (req,res,next)=>{
             res.json({success:-10,message:"No events"});
             return next();
         }else {
-            res.json({success:1,message:"Success",events:data});
+            let arr = [];
+            data.forEach(function(dat){
+                let obj = {
+                    title:dat.title,
+                    location:dat.location,
+                    date:dat.date,
+                    time:dat.time,
+                    description:dat.description,
+                    doc_details:dat.doc_details[0].name,
+                }
+                arr.push(obj);
+            })
+            res.json({success:1,message:"Success",events:arr});
             return next();
         }
 
