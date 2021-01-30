@@ -35,13 +35,13 @@
                         </v-list-item-content>
                     </v-list-item>
                 </router-link>
-                <router-link to="/profile/diary" tag="v-list-item">
+                <router-link to="/profile/vaccine" tag="v-list-item">
                     <v-list-item link>
                         <v-list-item-action>
-                        <v-icon>mdi-notebook</v-icon>
+                        <v-icon>mdi-needle</v-icon>
                         </v-list-item-action>
                         <v-list-item-content>
-                        <v-list-item-title>Personal Diary</v-list-item-title>
+                        <v-list-item-title>Vaccine Diary</v-list-item-title>
                         </v-list-item-content>
                     </v-list-item>
                 </router-link>
