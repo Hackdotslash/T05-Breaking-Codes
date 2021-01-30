@@ -9,7 +9,9 @@ module.exports = (app)=>{
     const forgotPassword        = require('./forgotPassword');
     const diseasePredict        = require('./diseasePredict');
     const getDoctors            = require('./getDoctors');
-
+    const add_event             = require('./doctor/add_event');
+    const get_events            = require('./getEvents');
+    const upd_doc               = require('./doctor/upd_doctor');
     /* VERIFY MAIL */
     app.post('/verify',verifyMail.VerifyMail);
     app.get('/verify/:token',verifyMail.verifyMailToken);
@@ -27,10 +29,14 @@ module.exports = (app)=>{
 
     /*MAIN APP ROUTES */
     app.post('/disease',diseasePredict.disease_predict);
-    app.post('/getDoctors',comFun.jwtAuth,getDoctors.getDoctors)
+    app.post('/getDoctors',comFun.jwtAuth,getDoctors.getDoctors);
+    app.post('/get_events',comFun.jwtAuth,get_events.getEvents);
     /*MAIN APP ROUTES */
 
-
+    /*DOCTOR APP ROUTE */
+    app.post('/doctor/add_event',comFun.jwtAuth,add_event.add_event);
+    app.post('/doctor/upd_doc',comFun.jwtAuth,upd_doc.upd_doc);
+    /*DOCTOR APP ROUTE */
 
     /*ADMIN ROUTES */
 
