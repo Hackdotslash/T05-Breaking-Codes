@@ -3,6 +3,7 @@ import 'package:dotslash_hackathon/utils/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DoctorInfo extends StatefulWidget {
   @override
@@ -19,11 +20,13 @@ class _DoctorInfoState extends State<DoctorInfo> {
     List<Doctor> doctorList = List();
     List<Map> dynamicList;
     var db = await openDatabase(
-      'doctors.db',
+      'dotslash.db',
       version: 1,
       onCreate: (Database db, int version) async {
         await db.execute(
             'CREATE TABLE Doctors (id INTEGER PRIMARY KEY, name TEXT, contact INTEGER, specialization TEXT, address TEXT, pincode INTEGER)');
+        await db.execute(
+            'CREATE TABLE Events (id INTEGER PRIMARY KEY, eventTitle TEXT, location TEXT, date TEXT, time TEXT, eventDescription TEXT)');
       },
     );
     dynamicList = await db.rawQuery('SELECT * FROM Doctors');
@@ -105,8 +108,9 @@ class _DoctorInfoState extends State<DoctorInfo> {
                                 "Doctor's Address: " + doctors[index].address),
                             trailing: IconButton(
                               icon: Icon(Icons.phone),
-                              onPressed: () {
-                                print('Call button pressed');
+                              onPressed: () async {
+                                await launch('tel:+91' +
+                                    doctors[index].contact.toString());
                               },
                             ),
                           ),
@@ -114,7 +118,41 @@ class _DoctorInfoState extends State<DoctorInfo> {
                       );
                     },
                   )
-                : ListView.builder(itemBuilder: null)
+                : suggestionsList.isEmpty
+                    ? Center(
+                        child: Text('No doctors found'),
+                      )
+                    : ListView.builder(
+                        itemCount: suggestionsList.length,
+                        physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: EdgeInsets.all(10),
+                            child: Card(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20)),
+                              child: ListTile(
+                                title: Text(
+                                  "Doctor's name: " +
+                                      suggestionsList[index].name,
+                                ),
+                                subtitle: Text("Doctor's Address: " +
+                                    suggestionsList[index].address),
+                                trailing: IconButton(
+                                  icon: Icon(Icons.phone),
+                                  onPressed: () async {
+                                    await launch('tel://' +
+                                        suggestionsList[index]
+                                            .contact
+                                            .toString());
+                                  },
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                      )
           ],
         );
       },
