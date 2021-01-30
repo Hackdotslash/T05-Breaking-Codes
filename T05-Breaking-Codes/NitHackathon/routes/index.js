@@ -8,6 +8,7 @@ module.exports = (app)=>{
     const verifyMail            = require('./verifyMail');
     const forgotPassword        = require('./forgotPassword');
     const diseasePredict        = require('./diseasePredict');
+    const getDoctors            = require('./getDoctors');
 
     /* VERIFY MAIL */
     app.post('/verify',verifyMail.VerifyMail);
@@ -26,7 +27,7 @@ module.exports = (app)=>{
 
     /*MAIN APP ROUTES */
     app.post('/disease',diseasePredict.disease_predict);
-
+    app.post('/getDoctors',comFun.jwtAuth,getDoctors.getDoctors)
     /*MAIN APP ROUTES */
 
 
