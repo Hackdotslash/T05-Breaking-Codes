@@ -22,7 +22,7 @@
                 </div>
                 <br><br>
                 <div class="form-group">
-                  <center><input type="submit" value="Sign In" class="btn btn-primary"></center>
+                  <center><input type="button" @click="login" value="Sign In" class="btn btn-primary"></center>
                 </div>
               </form>
               <br><br>
@@ -46,13 +46,13 @@ export default {
         },
         login()
         {
-          fetch("http://35.208.131.201:3000/admin/login", {
+          fetch("http://35.208.131.201:3000/doctor/login", {
             method: "POST",
             headers:{
               "Content-Type": "application/json"
             },
             body: JSON.stringify({
-              username:this.email,
+              email:this.email,
               password:this.pass
             }),
             
@@ -60,13 +60,36 @@ export default {
           .then(res => res.json())
           .then(data => {
             console.log(data);
-            localStorage.jwt = data.token;
-            localStorage.docEmail = this.uid;
-            localStorage.docPass = this.pass;
-            localStorage.docName= data.doctor.name;
-            localStorage.docSpecs = data.doctor.Specialization;
-            localStorage.docID = data.doctor._id;
-            this.$router.push('profile/patient');
+            console.log(data.token);
+            fetch(`http://35.208.131.201:3000/doctor/genTokenAndUserData`, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify({
+                token: data.token
+              })
+            })
+            .then(res2 => res2.json())
+            .then(data2 => {
+              console.log(data2);
+              localStorage.jwt = data2.token;
+              localStorage.docName = data2.user.name;
+              localStorage.docSpec = data2.user.specialization;
+              localStorage.docPincode = data2.user.pincode;
+              localStorage.contact = data2.user.contact;
+              localStorage.docEmail = data2.user.local.email;
+              localStorage.docAddr = data2.user.address;
+              this.$router.push('profile/patient');
+            })
+              
+            // localStorage.jwt = data.token;
+            // localStorage.docEmail = this.uid;
+            // localStorage.docPass = this.pass;
+            // localStorage.docName= data.doctor.name;
+            // localStorage.docSpecs = data.doctor.Specialization;
+            // localStorage.docID = data.doctor._id;
+            // this.$router.push('profile/patient');
           })
           .catch(() => {
             alert("Invalid inputs");

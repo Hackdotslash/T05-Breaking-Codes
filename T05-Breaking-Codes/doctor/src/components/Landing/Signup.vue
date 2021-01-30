@@ -15,7 +15,7 @@
                 </div>
                 <div class="form-group">
                   <label for="email" class="sr-only">Email</label>
-                  <input type="text" v-model="email" class="form-control" id="email" placeholder="Email" autocomplete="off">
+                  <input type="email" v-model="email" class="form-control" id="email" placeholder="Email" autocomplete="off">
                 </div>
                 <div class="form-group">
                   <label for="contact" class="sr-only">Contact</label>
@@ -82,27 +82,53 @@ export default {
             alert('Password not matched');
           }
           else{
-            fetch("http://35.208.131.201:3000/admin/", {
+            fetch("http://35.208.131.201:3000/doctor/signup", {
               method: "POST",
               headers:{
                 "Content-Type": "application/json"
               },
               body: JSON.stringify({
-                email:this.uid,
-                password:this.pass
+                email:this.email,
+                password:this.pass,
+                contact: this.contact,
+                address: this.address,
+                name : this.name,
+                specialization: this.spec,
+                pincode: this.pin
               }),
               
             })
             .then(res => res.json())
             .then(data => {
-              console.log(data);
-              localStorage.jwt = data.token;
-              localStorage.docEmail = this.uid;
-              localStorage.docPass = this.pass;
-              localStorage.docName= data.doctor.name;
-              localStorage.docSpecs = data.doctor.Specialization;
-              localStorage.docID = data.doctor._id;
-              this.$router.push('profile/patient');
+              console.log(data.token);
+                fetch(`http://35.208.131.201:3000/doctor/genTokenAndUserData`, {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json"
+                  },
+                  body: JSON.stringify({
+                    token: data.token
+                  })
+                })
+                .then(res2 => res2.json())
+                .then(data2 => {
+                  console.log(data2);
+                  localStorage.jwt = data2.token;
+                  localStorage.docName = data2.user.name;
+                  localStorage.docSpec = data2.user.specialization;
+                  localStorage.docPincode = data2.user.pincode;
+                  localStorage.contact = data2.user.contact;
+                  localStorage.docEmail = data2.user.local.email;
+                  localStorage.docAddr = data2.user.address;
+                  this.$router.push('profile/patient');
+                })
+              // localStorage.jwt = data.token;
+              // localStorage.docEmail = this.uid;
+              // localStorage.docPass = this.pass;
+              // localStorage.docName= data.doctor.name;
+              // localStorage.docSpecs = data.doctor.Specialization;
+              // localStorage.docID = data.doctor._id;
+              // this.$router.push('profile/patient');
             })
             .catch(() => {
               alert("Invalid inputs");
