@@ -24,6 +24,9 @@ module.exports = (app)=>{
     const get_doc_vaccines      = require('./doctor/get_doc_vaccines');
     const get_vaccines          = require('./get_patient_vaccine');
     const add_docs              = require('./add_docs')
+    const get_user_docs         = require('./get_user_docs');
+    const give_access           = require('./giveAccess');
+    const get_patient_docs      = require('./doctor/get_patient_docs')
 
     /* VERIFY MAIL */
     app.post('/verify',verifyMail.VerifyMail);
@@ -44,8 +47,10 @@ module.exports = (app)=>{
     app.post('/disease',diseasePredict.disease_predict);
     app.post('/getDoctors',comFun.jwtAuth,getDoctors.getDoctors);
     app.post('/get_events',comFun.jwtAuth,get_events.getEvents);
-    app.post('/get_vaccines',comFun.jwtAuth,get_vaccines.get_doc_vaccine)
+    app.post('/get_vaccines',comFun.jwtAuth,get_vaccines.get_doc_vaccine);
     app.post('/add_docs',comFun.jwtAuth,multerMid.single('file'),add_docs.doc);
+    app.post('/get_docs',comFun.jwtAuth,get_user_docs.get_user_docs);
+    app.post('/give_access',comFun.jwtAuth,give_access.get_user_docs);
     /*MAIN APP ROUTES */
 
     /*DOCTOR APP ROUTE */
@@ -56,6 +61,7 @@ module.exports = (app)=>{
     app.post('/doctor/add_shot',comFun.jwtAuth,add_shot.add_event);
     app.post('/doctor/add_vaccine',comFun.jwtAuth,add_vaccine.add_event);
     app.post('/doctor/get_doc_vaccines',comFun.jwtAuth,get_doc_vaccines.get_doc_vaccine);
+    app.post('/doctor/get_patient_docs',comFun.jwtAuth,get_patient_docs.get_user_docs);
     /*DOCTOR APP ROUTE */
 
     /*ADMIN ROUTES */

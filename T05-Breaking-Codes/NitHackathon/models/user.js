@@ -11,8 +11,13 @@ const userSchema = new mongoose.Schema({
     },
     LoginType:{type:String},
     name:String,
+    userId:String,
     contact:Number,
-    docs:[String],
+    docs:[{
+        link:String,
+        name:String,
+    }],
+    doctors:[mongoose.Schema.Types.ObjectId]
 });
 
 userSchema.methods.generateHash = function(password) {

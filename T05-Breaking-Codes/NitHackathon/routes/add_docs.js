@@ -6,7 +6,10 @@ module.exports.doc = (req,res,next)=>{
     if(!comFun.NotNullUndef(req.file)){
         res.json({success: 0,message:"No files Found"});
         return next();
-    }else {
+    }else if(!comFun.StrVal(req.body.name)){
+        res.json({success: 0,message:"No name"});
+        return next();
+    } else {
         let userId = res.locals.userId;
         const bucket = storage.bucket('nit_hack');
         const {
@@ -23,7 +26,8 @@ module.exports.doc = (req,res,next)=>{
         });
         blobStream.on('finish', () => {
             let docLink = `https://storage.googleapis.com/${bucket.name}/${blob.name}`
-            UserM.findOneAndUpdate({_id:userId},{$push:{docs:docLink}},function (err) {
+            UserM.findOneAndUpdate({_id:userId},{$push:{docs:{link:docLink,name:req.body.name}}},
+                function (err) {
                 if(err){
                     res.json({success:0,message:err})
                     return next();

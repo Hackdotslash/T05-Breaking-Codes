@@ -12,6 +12,7 @@ const doctorSchema = new mongoose.Schema({
     pincode:String,
     name:String,
     contact:Number,
+    users:[mongoose.Schema.Types.ObjectId]
 });
 doctorSchema.methods.generateHash = function(password) {
     return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);

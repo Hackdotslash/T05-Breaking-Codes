@@ -9,7 +9,7 @@ module.exports.add_event = (req,res,next)=>{
     }else if(!comFun.StrVal(req.body.date)){
         res.json({success:0,message:"No date"})
         return next();
-    }else if(!comFun.StrVal(req.body.status)){
+    }else if(!comFun.numVal(req.body.status)){
         res.json({success:0,message:"No status"})
         return next();
     }
