@@ -36,8 +36,6 @@ if __name__ == "__main__":
     b = []
     for i in arr:
         b.append(i)
-    print(b)
-    print(len(b))
     dp = DiseasePrediction()
     result = dp.make_prediction(test_data=[b])
     print(result)
