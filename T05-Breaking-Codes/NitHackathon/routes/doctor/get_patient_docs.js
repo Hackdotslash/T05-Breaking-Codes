@@ -1,11 +1,11 @@
 const DoctorM = require('../../models/doctor');
-
+const mongoose = require('mongoose');
 module.exports.get_user_docs = function(req,res,next){
     let userId = res.locals.userId;
     DoctorM.aggregate([
         {
             "$match" : {
-                "_id" : userId
+                "_id" : mongoose.Types.ObjectId(userId)
             }
         },
         {
