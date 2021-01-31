@@ -167,8 +167,7 @@ module.exports.disease_predict = (req,res,next)=> {
 
             console.log(disease);
             let homeRemedyLink = `https://google.com/search?q=Home%20Remedy%20For%20${disease}`
-            let message=`You are diagoned with *${disease}* \nYou may find useful remedies on ${homeRemedyLink} \n
-            Hope you get well soon\n-Virual Doctor(Breaking Codes)`
+            let message=`You are diagnosed with *${disease}* \n\nYou may find useful remedies on ${homeRemedyLink}\n\nHope you get well soon\n\n-Virual Doctor(Breaking Codes)`
 
             client.messages
                 .create({
