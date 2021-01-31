@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const vaccineSchema = new mongoose.Schema({
     name:String,
     date:String,
-    patient:mongoose.Schema.Types.ObjectId,
+    patient:String,
     comments:String,
     doctor:mongoose.Schema.Types.ObjectId,
     reminders:[String],

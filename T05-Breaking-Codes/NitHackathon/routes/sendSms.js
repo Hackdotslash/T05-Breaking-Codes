@@ -4,7 +4,9 @@ const client = require('twilio')(accountSid, authToken);
 
 module.exports.sendSms = (req,res,next)=>{
     const numberSend = req.body.number;
-    let message = '\nYour Vaccine is due in the next two days\nPlease get it done!';
+    const name = req.body.name;
+    const date = req.body.date;
+    let message = `Vaccine Reminder:\n\n Your next shot is due on ${date} for ${name}.\nPlease get it done!`
     client.messages
         .create({
             messagingServiceSid: 'MGff7b939f19c43e60279c824a11a38cae',
