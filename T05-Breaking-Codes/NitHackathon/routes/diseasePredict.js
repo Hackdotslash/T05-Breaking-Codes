@@ -158,7 +158,8 @@ module.exports.disease_predict = (req,res,next)=> {
 
         process.stdout.on('data', function (data) {
             console.log(data.toString())
+            res.json({success: 1,})
         })
-        res.json({success: 1,})
+
     }
 }
