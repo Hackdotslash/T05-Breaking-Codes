@@ -148,7 +148,7 @@ module.exports.disease_predict = (req,res,next)=> {
             if(inputsymp.includes(symp)){
                 sympArr+='1,'
             }else{
-                sympArr+='0';
+                sympArr+='0,';
             }
         })
         sympArr.slice(0,-1)
