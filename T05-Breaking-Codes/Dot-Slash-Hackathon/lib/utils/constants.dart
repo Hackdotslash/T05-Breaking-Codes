@@ -21,5 +21,9 @@ TextStyle kNormalTextStyle =
 
 const String kLogOutText = 'Logged out';
 const String kStatusText = 'status';
-
+const String homeUrl = 'http://35.208.131.201:3000/';
+const String authToken = "authToken";
+const String uid ='userId';
+const String emergencyContact = 'emergencyContact';
+const String doctorsList = 'doctorsList';
 const Color kButtonColor = Colors.teal;

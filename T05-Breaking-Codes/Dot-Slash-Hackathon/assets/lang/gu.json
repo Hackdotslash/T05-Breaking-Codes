@@ -1,0 +1,17 @@
+{
+    "headingText" : "હોમ સ્ક્રીન",
+    "logOutText" : "લૉગ આઉટ",
+    "pincodeText" : "એક પિનકોડ દાખલ કરો",
+    "doctorName" : "ડોક્ટરનું નામ: ",
+    "doctorAddress" : "ડોક્ટરનું સરનામું: ",
+    "nearbyDoctors" : "નજીકના ડોકટરો",
+    "nearbyEvents" : "નજીકની ઇવેન્ટ્સ",
+    "chatText" : "ચેટ બોટ",
+    "aboutText" : "અમારા વિશે",
+    "eventTextField" : "ઇવેન્ટ નામ દાખલ કરો",
+    "eventName" : "ઇવેન્ટનું નામ: ",
+    "eventDescription": "ઘટના વર્ણન: ",
+    "hostDoctor" : "હોસ્ટ ડોક્ટર",
+    "documents": "દસ્તાવેજો",
+    "vaccine" : "રસી ઇતિહાસ"
+}

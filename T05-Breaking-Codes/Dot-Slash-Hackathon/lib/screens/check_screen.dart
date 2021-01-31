@@ -1,4 +1,4 @@
-import 'package:dotslash_hackathon/screens/home_screen.dart';
+import 'package:dotslash_hackathon/screens/fetch_data_screen.dart';
 import 'package:dotslash_hackathon/screens/login_screen.dart';
 import 'package:dotslash_hackathon/utils/constants.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +24,7 @@ class _CheckScreenState extends State<CheckScreen> {
           context, MaterialPageRoute(builder: (context) => LoginScreen()));
     else
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => HomeScreen()));
+          context, MaterialPageRoute(builder: (context) => FetchData()));
   }
 
   @override

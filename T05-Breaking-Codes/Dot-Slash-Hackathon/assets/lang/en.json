@@ -1,0 +1,17 @@
+{
+    "headingText" : "Home Screen",
+    "logOutText" : "Log out",
+    "pincodeText" : "Enter a pincode",
+    "doctorName" : "Doctor's Name: ",
+    "doctorAddress" : "Doctor's Address: ",
+    "nearbyDoctors" : "Nearby Doctors",
+    "nearbyEvents" : "Nearby events",
+    "chatText" : "Chat bot",
+    "aboutText" : "About us",
+    "eventTextField" : "Enter event name",
+    "eventName" : "Event's name: ",
+    "eventDescription": "Event description: ",
+    "hostDoctor" : "Host Doctor",
+    "documents": "Documents",
+    "vaccine" : "Vaccine History"
+}

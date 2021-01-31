@@ -1,0 +1,17 @@
+{
+    "headingText" : "होम स्क्रीन",
+    "logOutText" : "लॉग आउट",
+    "pincodeText" : "एक पिनकोड दर्ज करें",
+    "doctorName" : "डॉक्टर का नाम: ",
+    "doctorAddress" : "डॉक्टर का पता: ",
+    "nearbyDoctors" : "आस-पास के डॉक्टर",
+    "nearbyEvents" : "आसपास की घटनाएं",
+    "chatText" : "चैट बॉट",
+    "aboutText" : "हमारे बारे में",
+    "eventTextField" : "ईवेंट नाम दर्ज करें",
+    "eventName" : "घटना का नाम: ",
+    "eventDescription": "घटना विवरण: ",
+    "hostDoctor" : "मेजबान डॉक्टर",
+    "documents": "दस्तावेज",
+    "vaccine" : "वैक्सीन का इतिहास"
+}

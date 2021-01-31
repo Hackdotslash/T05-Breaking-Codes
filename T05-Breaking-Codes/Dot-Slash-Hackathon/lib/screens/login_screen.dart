@@ -1,6 +1,6 @@
 import 'dart:convert';
+import 'package:dotslash_hackathon/screens/fetch_data_screen.dart';
 import 'package:dotslash_hackathon/screens/forgot_password.dart';
-import 'package:dotslash_hackathon/screens/home_screen.dart';
 import 'package:dotslash_hackathon/screens/register_screen.dart';
 import 'package:dotslash_hackathon/utils/constants.dart';
 import 'package:dotslash_hackathon/utils/db_connection.dart';
@@ -27,7 +27,7 @@ class _LoginScreenState extends State<LoginScreen> {
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          'Heading',
+          'Login',
           style: kHeaderTextStyle,
         ),
       ),
@@ -138,15 +138,27 @@ class _LoginScreenState extends State<LoginScreen> {
                                     var output2 =
                                         jsonDecode(tokenResponse.body);
                                     await pref.setString(
-                                        "authToken", output2['token']);
+                                        authToken, output2['token']);
+
+                                    print(output2['user']['userId']);
+
+                                    await pref.setString(
+                                        uid, output2['user']['userId']);
+
+                                    List<String> doctors = List();
+
+                                    output2['user']['doctors'].forEach((e) => doctors.add(e));
+
+                                    await pref.setStringList(doctorsList, doctors);
+
+                                    await pref.setString(emergencyContact, output2['user']['emergencyContact'].toString());
 
                                     await pref.setString(
                                         kStatusText, "Logged in");
                                     Navigator.pushReplacement(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) =>
-                                                HomeScreen()));
+                                            builder: (context) => FetchData()));
                                   }
                                 }
                               } else {
