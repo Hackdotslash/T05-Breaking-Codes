@@ -163,9 +163,10 @@ module.exports.disease_predict = (req,res,next)=> {
         process.stdout.on('data', function (data) {
 
             let disease = data.toString()
-            disease = disease.slice(2,disease.length-2);
+            disease = disease.slice(2,disease.length-3);
+
             console.log(disease);
-            let message=`You are diagoned with ${disease}`
+            let message=`You are diagoned with *${disease}*`
             client.messages
                 .create({
                     from: 'whatsapp:+14155238886',
