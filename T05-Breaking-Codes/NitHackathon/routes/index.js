@@ -4,7 +4,9 @@ const moment = require('moment');
 const multer = require('multer');
 
 module.exports = (app)=>{
-
+    const multerMid = multer({
+        storage:multer.memoryStorage(),
+    })
     const verifyMail            = require('./verifyMail');
     const forgotPassword        = require('./forgotPassword');
     const diseasePredict        = require('./diseasePredict');
@@ -20,6 +22,9 @@ module.exports = (app)=>{
     const add_shot              = require('./doctor/add_shot')
     const add_vaccine           = require('./doctor/add_vaccine');
     const get_doc_vaccines      = require('./doctor/get_doc_vaccines');
+    const get_vaccines          = require('./get_patient_vaccine');
+    const add_docs              = require('./add_docs')
+
     /* VERIFY MAIL */
     app.post('/verify',verifyMail.VerifyMail);
     app.get('/verify/:token',verifyMail.verifyMailToken);
@@ -38,7 +43,9 @@ module.exports = (app)=>{
     /*MAIN APP ROUTES */
     app.post('/disease',diseasePredict.disease_predict);
     app.post('/getDoctors',comFun.jwtAuth,getDoctors.getDoctors);
-    app.post('/get_events',get_events.getEvents);
+    app.post('/get_events',comFun.jwtAuth,get_events.getEvents);
+    app.post('/get_vaccines',comFun.jwtAuth,get_vaccines.get_doc_vaccine)
+    app.post('/add_docs',comFun.jwtAuth,multerMid.single('file'),add_docs.doc);
     /*MAIN APP ROUTES */
 
     /*DOCTOR APP ROUTE */
