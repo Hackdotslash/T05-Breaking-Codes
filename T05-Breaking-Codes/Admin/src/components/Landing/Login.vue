@@ -5,7 +5,7 @@
             
             <div class="col-md-4" style="padding-bottom:0!important;">
               <br><br>
-              <h4 class="text-center">Admin Portal - Secure Health</h4>
+              <h4 class="text-center">Admin Portal - Rural Healthcare</h4>
               <!-- Start Sign In Form -->
               <form action="#" class="fh5co-form animate-box" data-animate-effect="fadeIn">
                 <h2>Sign In</h2>
@@ -53,7 +53,7 @@ export default {
           })
           .then(res => res.json())
           .then(data => {
-            localStorage.jwt = data.token;
+            localStorage.ajwt = data.token;
             console.log(data);
             this.$router.push('/admin/event')
           })

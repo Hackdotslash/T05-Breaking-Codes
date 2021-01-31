@@ -6,25 +6,6 @@
         >
             <v-list dense>
                 <router-link to="/profile/patient" tag="v-list-item">
-                    <v-list-item link>
-                        <v-list-item-action>
-                        <v-icon>mdi-account</v-icon>
-                        </v-list-item-action>
-                        <v-list-item-content>
-                        <v-list-item-title>Patient Details</v-list-item-title>
-                        </v-list-item-content>
-                    </v-list-item>
-                </router-link>
-                
-                    <v-list-item link @click="revoke()">
-                        <v-list-item-action>
-                        <v-icon>mdi-logout</v-icon>
-                        </v-list-item-action>
-                        <v-list-item-content>
-                        <v-list-item-title>Revoke Patient</v-list-item-title>
-                        </v-list-item-content>
-                    </v-list-item>
-                
                 <router-link to="/profile/event" tag="v-list-item">
                     <v-list-item link>
                         <v-list-item-action>
@@ -45,6 +26,26 @@
                         </v-list-item-content>
                     </v-list-item>
                 </router-link>
+                    <v-list-item link>
+                        <v-list-item-action>
+                        <v-icon>mdi-account</v-icon>
+                        </v-list-item-action>
+                        <v-list-item-content>
+                        <v-list-item-title>Patient Details</v-list-item-title>
+                        </v-list-item-content>
+                    </v-list-item>
+                </router-link>
+                
+                    <v-list-item link @click="revoke()">
+                        <v-list-item-action>
+                        <v-icon>mdi-logout</v-icon>
+                        </v-list-item-action>
+                        <v-list-item-content>
+                        <v-list-item-title>Revoke Patient</v-list-item-title>
+                        </v-list-item-content>
+                    </v-list-item>
+                
+                
                 <router-link to="/profile/diary" tag="v-list-item">
                     <v-list-item link>
                         <v-list-item-action>
@@ -52,6 +53,16 @@
                         </v-list-item-action>
                         <v-list-item-content>
                         <v-list-item-title>Jobs</v-list-item-title>
+                        </v-list-item-content>
+                    </v-list-item>
+                </router-link>
+                <router-link to="/profile/account" tag="v-list-item">
+                    <v-list-item link>
+                        <v-list-item-action>
+                        <v-icon>mdi-account-circle</v-icon>
+                        </v-list-item-action>
+                        <v-list-item-content>
+                        <v-list-item-title>Account</v-list-item-title>
                         </v-list-item-content>
                     </v-list-item>
                 </router-link>
@@ -71,7 +82,7 @@
             dark
         >
             <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-            <v-toolbar-title>Doctor Portal - Secure Health</v-toolbar-title>
+            <v-toolbar-title>Doctor Portal - Rural Healthcare</v-toolbar-title>
             <v-spacer></v-spacer>
             <v-toolbar-title class="pr-2">Welcome, Dr. {{ docName }}</v-toolbar-title>
 

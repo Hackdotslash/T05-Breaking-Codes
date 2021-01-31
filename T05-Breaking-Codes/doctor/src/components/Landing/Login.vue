@@ -5,7 +5,7 @@
             
             <div class="col-md-4" style="padding-bottom:0!important;">
               <br><br>
-              <h4 class="text-center">Doctor Portal - Secure Health</h4>
+              <h4 class="text-center">Doctor Portal - Rural Healthcare</h4>
               <!-- Start Sign In Form -->
               <form action="#" class="fh5co-form animate-box" data-animate-effect="fadeIn">
                 <h2>Sign In</h2>
@@ -80,7 +80,7 @@ export default {
               localStorage.contact = data2.user.contact;
               localStorage.docEmail = data2.user.local.email;
               localStorage.docAddr = data2.user.address;
-              this.$router.push('profile/patient');
+              this.$router.push('profile/account');
             })
               
             // localStorage.jwt = data.token;

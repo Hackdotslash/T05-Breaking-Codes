@@ -85,7 +85,7 @@
     
     <div style="display:none" ref="target">
         <div class="container pt-4" ref="content">
-            <h2 class="text-center" style="color:#00827f">Secure Health</h2>
+            <h2 class="text-center" style="color:#00827f">Rural Healthcare</h2>
             <br>
             <h5>Prescription for {{pTitle}}</h5>
             <div style="color: #fff;font-weight: 600">Report</div>
@@ -121,7 +121,7 @@
             </div>
             <hr style="border: 2px solid #00827f">
             <div style="color: #fff;font-weight: 600">Report</div>
-            <h3 class="text-center">Get well soon, Regards <span style="color:#00827f">Secure Health</span></h3>
+            <h3 class="text-center">Get well soon, Regards <span style="color:#00827f">Rural Healthcare</span></h3>
             
         </div>
     </div>

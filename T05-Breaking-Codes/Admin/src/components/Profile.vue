@@ -52,7 +52,7 @@
             dark
         >
             <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-            <v-toolbar-title>Admin Portal - Secure Health</v-toolbar-title>
+            <v-toolbar-title>Admin Portal - Rural Healthcare</v-toolbar-title>
             <v-spacer></v-spacer>
             <v-toolbar-title class="pr-2">Welcome Admin</v-toolbar-title>
 
@@ -77,7 +77,7 @@ export default {
         logout()
         {
             this.$router.push('/');
-            localStorage.jwt = '';
+            localStorage.ajwt = '';
             localStorage.docEmail = '';
             localStorage.docPass = '';
             localStorage.docName= '';

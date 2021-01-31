@@ -58,7 +58,7 @@ export default {
             fetch(`http://35.208.131.201:3000/admin/get_events`, {
                 method: "POST",
                 headers: {
-                    "X-Auth-Token": localStorage.jwt
+                    "X-Auth-Token": localStorage.ajwt
                 }
             })
             .then(res => res.json())
@@ -80,7 +80,7 @@ export default {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "X-Auth-Token": localStorage.jwt
+                    "X-Auth-Token": localStorage.ajwt
                 },
                 body: JSON.stringify({
                     eventId: id,

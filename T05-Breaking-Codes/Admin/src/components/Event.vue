@@ -64,7 +64,7 @@ export default {
             fetch(`http://35.208.131.201:3000/admin/get_events`, {
                 method: "POST",
                 headers: {
-                    "X-Auth-Token": localStorage.jwt
+                    "X-Auth-Token": localStorage.ajwt
                 }
             })
             .then(res => res.json())
@@ -82,11 +82,11 @@ export default {
         {
             const formatDate= this.date.split("-");
             const newDate = `${formatDate[2]}-${formatDate[1]}-${formatDate[0]}`;
-            console.log(localStorage.jwt);
+            console.log(localStorage.ajwt);
             fetch(`http://35.208.131.201:3000/doctor/add_event`, {
                 method: "POST",
                 headers: {
-                    "X-Auth-Token": localStorage.jwt,
+                    "X-Auth-Token": localStorage.ajwt,
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({

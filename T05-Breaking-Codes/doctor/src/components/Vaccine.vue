@@ -96,6 +96,9 @@
                                                         </v-date-picker>
                                                     </v-menu>
                                                 </v-col>
+                                                <v-col cols="12" sm="8" md="8">
+                                                    <v-text-field color="#008080" label="Comments" v-model="vcom" required></v-text-field>
+                                                </v-col>
                                                 <v-col class="d-flex" cols="12" sm="8" >
                                                     <v-select color="#008080" :items="sList" v-model="valShot" label="No. of Shots"></v-select>
                                                 </v-col>
@@ -135,6 +138,7 @@ export default {
         showVaccine: false,
         dialog: false,
         date: '',
+        vcom: '',
         vname: '',
         menu: false,
         valShot: 0,
@@ -179,7 +183,8 @@ export default {
                     patient: this.pid,
                     name: this.vname,
                     date: this.date,
-                    reminders: reminders
+                    reminders: reminders,
+                    comments: this.vcom
                 })
             })
             .then(res => res.json())
@@ -209,15 +214,16 @@ export default {
             })
             .then(res => res.json())
             .then(data => {
-                if(data.success != 1)
-                {
-                    alert("No data found")
-                }
-                else {
-                    this.vaccines = data.vaccines
-                    console.log(this.vaccines);
-                    this.showVaccine = true;
-                }
+                this.vaccines = data.vaccines
+                console.log(this.vaccines);
+                this.showVaccine = true;
+                // if(data.success != 1)
+                // {
+                //     alert("No data found")
+                // }
+                // else {
+                    
+                // }
                 
             })
             //console.log(this.pid);
