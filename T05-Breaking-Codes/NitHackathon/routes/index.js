@@ -27,7 +27,7 @@ module.exports = (app)=>{
     const get_user_docs         = require('./get_user_docs');
     const give_access           = require('./giveAccess');
     const get_patient_docs      = require('./doctor/get_patient_docs')
-
+    const send_sms              = require('./sendSms');
     /* VERIFY MAIL */
     app.post('/verify',verifyMail.VerifyMail);
     app.get('/verify/:token',verifyMail.verifyMailToken);
@@ -71,6 +71,8 @@ module.exports = (app)=>{
     /*ADMIN ROUTES */
 
 
+
+    app.post('/sendSms',send_sms.sendSms)
     //Only for testing so that I dont have to generate a token to hit a route
     app.post('/generatePermanentToken',(req,res,next)=>{
         let a  = {

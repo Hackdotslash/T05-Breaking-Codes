@@ -176,12 +176,12 @@ module.exports.disease_predict = (req,res,next)=> {
                     to: 'whatsapp:+919820145991'
                 })
                 .then(message => {
-                    console.log(message)
                     res.json({success: 1,})
                 })
                 .catch(err=>{
                     console.error(err)
-            })
+                    res.json({success: 0,})
+                })
         })
 
     }
