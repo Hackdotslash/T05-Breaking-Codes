@@ -151,13 +151,21 @@ module.exports.disease_predict = (req,res,next)=> {
                 sympArr+='0,';
             }
         })
-        sympArr = sympArr.slice(0,-1)
+        sympArr = sympArr.slice(0,-3)
         console.log(sympArr)
         let spawn = child_process.spawn;
         let process = spawn('python3', ['./diseasePredict/main.py', sympArr])
-        console.log(process)
+
+        let process1 = spawn('python3', ['./diseasePredict/main.py', '1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0\n' +
+        ',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n' +
+        '0,0,0,0,0'])
+
         process.stdout.on('data', function (data) {
             res.send(data.toString());
         })
+        // process1.stdout.on('data', function (data) {
+        //     res.send(data.toString());
+        // })
+
     }
 }
