@@ -12,5 +12,6 @@
     "eventName" : "घटना का नाम: ",
     "eventDescription": "घटना विवरण: ",
     "hostDoctor" : "मेजबान डॉक्टर",
-    "documents": "दस्तावेज"
+    "documents": "दस्तावेज",
+    "vaccine" : "वैक्सीन का इतिहास"
 }

@@ -1,6 +1,4 @@
 import 'dart:convert';
-import 'dart:async';
-import 'package:async/async.dart';
 import 'package:dotslash_hackathon/models/Report.dart';
 import 'package:dotslash_hackathon/utils/constants.dart';
 import 'package:file_picker/file_picker.dart';

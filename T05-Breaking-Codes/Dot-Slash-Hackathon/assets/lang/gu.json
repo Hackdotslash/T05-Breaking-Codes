@@ -12,5 +12,6 @@
     "eventName" : "ઇવેન્ટનું નામ: ",
     "eventDescription": "ઘટના વર્ણન: ",
     "hostDoctor" : "હોસ્ટ ડોક્ટર",
-    "documents": "દસ્તાવેજો"
+    "documents": "દસ્તાવેજો",
+    "vaccine" : "રસી ઇતિહાસ"
 }

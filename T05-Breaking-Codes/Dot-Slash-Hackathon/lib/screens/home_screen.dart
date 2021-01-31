@@ -5,11 +5,13 @@ import 'package:dotslash_hackathon/screens/doctor_info_page.dart';
 import 'package:dotslash_hackathon/screens/documents_page.dart';
 import 'package:dotslash_hackathon/screens/event_info_page.dart';
 import 'package:dotslash_hackathon/screens/login_screen.dart';
+import 'package:dotslash_hackathon/screens/vaccine_page.dart';
 import 'package:dotslash_hackathon/utils/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -46,8 +48,26 @@ class _HomeScreenState extends State<HomeScreen> {
                     MaterialPageRoute(builder: (context) => LoginScreen()));
               },
             ),
+            SizedBox(
+              width:10
+            ),
+            GestureDetector(
+              child: Center(
+                child: Text(
+                  'SOS',
+                  style: TextStyle(fontSize: 15, color: Colors.red),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              onTap: () async {
+                final pref = await SharedPreferences.getInstance();
+                String emergency = pref.getString(emergencyContact);
+                print(emergency);
+                await launch('tel://+91' + emergency);
+              },
+            ),
             Padding(
-              padding: EdgeInsets.all(5),
+              padding: EdgeInsets.all(1),
               child: DropdownButton(
                 onChanged: (Language val) {
                   if (val.code == 'hi') {
@@ -76,9 +96,9 @@ class _HomeScreenState extends State<HomeScreen> {
             : _currentIndex == 1
                 ? EventPage()
                 : _currentIndex == 2
-                    ? ChatScreen()
+                    ? UploadDocuments()
                     : _currentIndex == 3
-                        ? UploadDocuments()
+                        ? VaccinePage()
                         : AboutUs(),
         bottomNavigationBar: BottomNavigationBar(
           selectedItemColor: Colors.teal,
@@ -95,10 +115,11 @@ class _HomeScreenState extends State<HomeScreen> {
             BottomNavigationBarItem(
                 icon: Icon(Icons.event), title: Text('nearbyEvents'.tr())),
             BottomNavigationBarItem(
-                icon: Icon(Icons.chat), title: Text('chatText').tr()),
-            BottomNavigationBarItem(
                 icon: Icon(Icons.picture_as_pdf),
                 title: Text('documents').tr()),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.medical_services),
+                title: Text('vaccine').tr()),
             BottomNavigationBarItem(
                 icon: Icon(Icons.info), title: Text('aboutText'.tr())),
           ],

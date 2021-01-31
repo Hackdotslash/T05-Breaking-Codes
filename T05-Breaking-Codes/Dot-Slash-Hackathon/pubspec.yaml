@@ -38,7 +38,6 @@ dependencies:
   url_launcher: ^5.7.10
   easy_localization:
   file_picker: ^1.13.0+1
-  async: ^2.4.2
 
 dev_dependencies:
   flutter_test:

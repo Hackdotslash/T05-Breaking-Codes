@@ -12,5 +12,6 @@
     "eventName" : "Event's name: ",
     "eventDescription": "Event description: ",
     "hostDoctor" : "Host Doctor",
-    "documents": "Documents"
+    "documents": "Documents",
+    "vaccine" : "Vaccine History"
 }

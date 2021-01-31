@@ -42,13 +42,14 @@ class _FetchDataState extends State<FetchData> {
       var db = await openDatabase('dotslash.db');
       await db.transaction((txn) async {
         await txn.rawInsert(
-            'INSERT INTO Doctors(name, contact, specialization, address, pincode) values(?,?,?,?,?)',
+            'INSERT INTO Doctors(name, contact, specialization, address, pincode,uid) values(?,?,?,?,?,?)',
             [
               element.name,
               element.contact,
               element.specialization,
               element.address,
-              element.pinCode
+              element.pinCode,
+              element.uid
             ]);
       });
     });
@@ -98,7 +99,7 @@ class _FetchDataState extends State<FetchData> {
       version: 1,
       onCreate: (Database db, int version) async {
         await db.execute(
-            'CREATE TABLE Doctors (id INTEGER PRIMARY KEY, name TEXT, contact INTEGER, specialization TEXT, address TEXT, pincode INTEGER)');
+            'CREATE TABLE Doctors (id INTEGER PRIMARY KEY, name TEXT, contact INTEGER, specialization TEXT, address TEXT, pincode INTEGER, uid TEXT)');
         await db.execute(
             'CREATE TABLE Events (id INTEGER PRIMARY KEY, eventTitle TEXT, location TEXT, date TEXT, time TEXT, eventDescription TEXT, hostDoctor TEXT)');
       },
@@ -108,7 +109,7 @@ class _FetchDataState extends State<FetchData> {
     await db.execute('DROP TABLE Events');
 
     await db.execute(
-        'CREATE TABLE Doctors (id INTEGER PRIMARY KEY, name TEXT, contact INTEGER, specialization TEXT, address TEXT, pincode INTEGER)');
+        'CREATE TABLE Doctors (id INTEGER PRIMARY KEY, name TEXT, contact INTEGER, specialization TEXT, address TEXT, pincode INTEGER, uid TEXT)');
     await db.execute(
         'CREATE TABLE Events (id INTEGER PRIMARY KEY, eventTitle TEXT, location TEXT, date TEXT, time TEXT, eventDescription TEXT, hostDoctor TEXT)');
 

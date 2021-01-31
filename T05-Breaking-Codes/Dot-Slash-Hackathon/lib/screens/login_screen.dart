@@ -140,13 +140,25 @@ class _LoginScreenState extends State<LoginScreen> {
                                     await pref.setString(
                                         authToken, output2['token']);
 
+                                    print(output2['user']['userId']);
+
+                                    await pref.setString(
+                                        uid, output2['user']['userId']);
+
+                                    List<String> doctors = List();
+
+                                    output2['user']['doctors'].forEach((e) => doctors.add(e));
+
+                                    await pref.setStringList(doctorsList, doctors);
+
+                                    await pref.setString(emergencyContact, output2['user']['emergencyContact'].toString());
+
                                     await pref.setString(
                                         kStatusText, "Logged in");
                                     Navigator.pushReplacement(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) =>
-                                                FetchData()));
+                                            builder: (context) => FetchData()));
                                   }
                                 }
                               } else {

@@ -4,11 +4,13 @@ class Doctor {
   String specialization;
   String address;
   int pinCode;
+  String uid;
 
   Doctor(
       {this.name,
       this.address,
       this.contact,
       this.pinCode,
-      this.specialization});
+      this.specialization,
+      this.uid});
 }

@@ -18,6 +18,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
   String _name;
   String _email;
   String _password;
+  String _contact;
+  String _age;
+  String _emergencyContact;
+  String _address;
   bool _isRegistering = false;
 
   @override
@@ -66,6 +70,77 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             style: kTextFieldStyle,
                             decoration: InputDecoration(
                                 labelText: 'Enter Name',
+                                labelStyle: kTextFieldLabelStyle),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 30, right: 30),
+                          child: TextFormField(
+                            keyboardType: TextInputType.phone,
+                            validator: (String value) {
+                              if (value.isEmpty)
+                                return 'Contact is a required field';
+                              return null;
+                            },
+                            onSaved: (String value) {
+                              _contact = value;
+                            },
+                            style: kTextFieldStyle,
+                            decoration: InputDecoration(
+                                labelText: 'Enter Contact number',
+                                labelStyle: kTextFieldLabelStyle),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 30, right: 30),
+                          child: TextFormField(
+                            keyboardType: TextInputType.number,
+                            validator: (String value) {
+                              if (value.isEmpty)
+                                return 'Age is a required field';
+                              return null;
+                            },
+                            onSaved: (String value) {
+                              _age = value;
+                            },
+                            style: kTextFieldStyle,
+                            decoration: InputDecoration(
+                                labelText: 'Enter Age',
+                                labelStyle: kTextFieldLabelStyle),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 30, right: 30),
+                          child: TextFormField(
+                            keyboardType: TextInputType.number,
+                            validator: (String value) {
+                              if (value.isEmpty)
+                                return 'Emergency contact is a required field';
+                              return null;
+                            },
+                            onSaved: (String value) {
+                              _emergencyContact = value;
+                            },
+                            style: kTextFieldStyle,
+                            decoration: InputDecoration(
+                                labelText: 'Enter Emergency contact',
+                                labelStyle: kTextFieldLabelStyle),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 30, right: 30),
+                          child: TextFormField(
+                            validator: (String value) {
+                              if (value.isEmpty)
+                                return 'Address is a required field';
+                              return null;
+                            },
+                            onSaved: (String value) {
+                              _address = value;
+                            },
+                            style: kTextFieldStyle,
+                            decoration: InputDecoration(
+                                labelText: 'Enter Address',
                                 labelStyle: kTextFieldLabelStyle),
                           ),
                         ),
@@ -133,9 +208,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 _isRegistering = true;
                               });
                               User user = User(
-                                  email: _email,
-                                  password: _password,
-                                  name: _name);
+                                email: _email,
+                                password: _password,
+                                name: _name,
+                                address: _address,
+                                age: _age,
+                                contact: _contact,
+                                emergencyContact: _emergencyContact,
+                              );
                               var resp =
                                   await DBConnections().registerUser(user);
                               if (resp.statusCode == 200) {

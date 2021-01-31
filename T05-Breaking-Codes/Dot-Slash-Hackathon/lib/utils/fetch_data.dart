@@ -35,4 +35,15 @@ class FetchOnlineData {
     });
     return response;
   }
+
+  Future getVaccines() async{
+    final pref = await SharedPreferences.getInstance();
+    String token = pref.getString(authToken);
+    String url = homeUrl + 'get_vaccines';
+    var response = await http.post(url, headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+      "X-Auth-Token": token
+    });
+    return response;
+  }
 }
