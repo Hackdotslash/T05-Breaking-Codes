@@ -141,7 +141,6 @@ module.exports.disease_predict = (req,res,next)=> {
             'blister',
             'red_sore_around_nose',
             'yellow_crust_ooze',
-            'prognosis'
         ]
         let sympArr = ''
         symptoms.forEach(symp=>{
@@ -151,7 +150,7 @@ module.exports.disease_predict = (req,res,next)=> {
                 sympArr+='0,';
             }
         })
-        sympArr = sympArr.slice(0,-3)
+        sympArr = sympArr.slice(0,-1)
         console.log(sympArr)
         let spawn = child_process.spawn;
         let process = spawn('python3', ['./diseasePredict/main.py', sympArr])
