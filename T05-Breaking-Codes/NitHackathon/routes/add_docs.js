@@ -4,6 +4,8 @@ const UserM = require('../models/user');
 
 module.exports.doc = (req,res,next)=>{
     if(!comFun.NotNullUndef(req.file)){
+        console.log(req.file);
+        console.log(req.body);
         console.log("NO FILE FOUND")
         res.json({success: 0,message:"No files Found"});
         return next();
