@@ -151,7 +151,7 @@ module.exports.disease_predict = (req,res,next)=> {
                 sympArr+='0,';
             }
         })
-        sympArr.slice(0,-1)
+         sympArr = sympArr.slice(0,-1)
         console.log(sympArr)
         let spawn = child_process.spawn;
         let process = spawn('python3', ['./diseasePredict/main.py', sympArr])
