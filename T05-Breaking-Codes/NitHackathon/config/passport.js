@@ -103,8 +103,11 @@ module.exports = function (passport) {
 								var newUser = new User();
 								newUser.local.email = email1;
 								newUser.local.isVerified = false;
-								newUser.LoginType = 'Local';
+								newUser.age = req.body.age;
 								newUser.name = req.body.name;
+								newUser.contact = req.body.contact;
+								newUser.emergencyContact = req.body.emergencyContact;
+								newUser.address          = req.body.address;
 								newUser.userId = req.body.name + Math.floor(Math.random() * 90000) + 10000;
 								newUser.local.password = newUser.generateHash(password);
 								newUser.save(function (err) {
