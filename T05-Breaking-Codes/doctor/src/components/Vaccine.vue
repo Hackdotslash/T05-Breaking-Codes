@@ -33,11 +33,32 @@
                                             </div>
                                         </div>
                                         <br>
-                                        <div><strong>Shots taken:</strong> 
-                                            <div v-for="shot in vac.shots" :key="shot">
-                                                {{ shot.date }}
-                                            </div>
-                                        </div>
+                                        <v-row>
+                                            <v-col md="6">
+                                                <div><strong>Shots taken:</strong> 
+                                                    <div v-for="shot in vac.shots" :key="shot">
+                                                        <div v-if="shot.status == 1">
+                                                            {{ shot.date }}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </v-col>
+                                            <v-col md="6">
+                                                <div><strong>Shots pending:</strong> 
+                                                    <div v-for="shot in vac.shots" :key="shot">
+                                                        <div v-if="shot.status == 0">
+                                                            {{ shot.date }} 
+                                                            
+                                                            <v-icon @click="addShot(shot.date, vac._id)">mdi-shield-plus</v-icon>
+                                                            <v-spacer></v-spacer>
+                                                            <v-spacer></v-spacer>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </v-col>
+                                        </v-row>
+                                        <br><br>
+                                        
                                     </v-card-text>
                                     
                                 </v-card>
@@ -75,8 +96,11 @@
                                                         </v-date-picker>
                                                     </v-menu>
                                                 </v-col>
-                                                <v-col cols="12" sm="8" md="6">
-                                                    <v-text-field color="#008080" label="Total shots" v-model="vshot" required></v-text-field>
+                                                <v-col class="d-flex" cols="12" sm="8" >
+                                                    <v-select color="#008080" :items="sList" v-model="valShot" label="No. of Shots"></v-select>
+                                                </v-col>
+                                                <v-col class="d-flex" cols="12" sm="6" v-for="val in valShot" :key="val">
+                                                    <v-text-field color="#008080" label="Next shot date" :id="val" required></v-text-field>
                                                 </v-col>
                                             </v-row>
                                         </v-container>
@@ -86,8 +110,8 @@
                                         <v-btn color="#008080 darken-1" text @click="dialog = false">
                                             Close
                                         </v-btn>
-                                        <v-btn color="#008080 darken-1" text @click="dialog = false">
-                                            Save
+                                        <v-btn color="#008080 darken-1" text @click="addVac">
+                                            Upload
                                         </v-btn>
                                         </v-card-actions>
                                     </v-card>
@@ -113,9 +137,64 @@ export default {
         date: '',
         vname: '',
         menu: false,
-        vshot: 0,
+        valShot: 0,
+        sList: [1,2,3,4,5]
     }),
     methods: {
+        addShot(sDate, sId)
+        {
+            fetch(`http://35.208.131.201:3000/doctor/add_shot`, {
+                method: "POST",
+                headers: {
+                    "X-Auth-Token": localStorage.jwt,
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    vaccine: sId,
+                    date: sDate,
+                    status: 1
+                })
+            })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                this.search();
+            })
+        },
+        addVac()
+        {
+            const reminders = [];
+            for(let i=1; i<= this.valShot; i++)
+            {
+                console.log(document.getElementById(i).value);
+                reminders.push(document.getElementById(i).value);
+            }
+            fetch(`http://35.208.131.201:3000/doctor/add_vaccine`, {
+                method: "POST",
+                headers: {
+                    "X-Auth-Token": localStorage.jwt,
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    patient: this.pid,
+                    name: this.vname,
+                    date: this.date,
+                    reminders: reminders
+                })
+            })
+            .then(res => res.json())
+            .then(data => {
+                this.dialog = false;
+                if(data.success == 1){
+                    alert("Vaccine added succesfully");
+                    this.vname = '';
+                    this.date = '';
+                    this.valShot = 0
+                    this.search();
+                }
+            })
+            console.log(reminders);
+        },
         search()
         {
             fetch(`http://35.208.131.201:3000/doctor/get_patient_vaccines`, {
