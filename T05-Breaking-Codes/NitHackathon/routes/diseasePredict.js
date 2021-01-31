@@ -166,7 +166,10 @@ module.exports.disease_predict = (req,res,next)=> {
             disease = disease.slice(2,disease.length-3);
 
             console.log(disease);
-            let message=`You are diagoned with *${disease}*`
+            let homeRemedyLink = `https://google.com/search?q=Home%20Remedy%20For%20${disease}`
+            let message=`You are diagoned with *${disease}* \n
+            For Home Remedies Visit ${homeRemedyLink}`
+
             client.messages
                 .create({
                     from: 'whatsapp:+14155238886',
