@@ -4,9 +4,11 @@ const UserM = require('../models/user');
 
 module.exports.doc = (req,res,next)=>{
     if(!comFun.NotNullUndef(req.file)){
+        console.log("NO FILE FOUND")
         res.json({success: 0,message:"No files Found"});
         return next();
     }else if(!comFun.StrVal(req.body.name)){
+        console.log("NO name")
         res.json({success: 0,message:"No name"});
         return next();
     } else {
@@ -32,6 +34,7 @@ module.exports.doc = (req,res,next)=>{
                     res.json({success:0,message:err})
                     return next();
                 }else {
+                    console.log("DOC UPLOADED",docLink)
                     res.json({success:1,message:"Success"})
                     return next();
                 }
