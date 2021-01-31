@@ -9,9 +9,17 @@ const userSchema = new mongoose.Schema({
         password: String,
         isVerified: Boolean,
     },
-    LoginType:{type:String},
+    age:Number,
     name:String,
+    userId:String,
     contact:Number,
+    emergencyContact:Number,
+    address:String,
+    docs:[{
+        link:String,
+        name:String,
+    }],
+    doctors:[mongoose.Schema.Types.ObjectId]
 });
 
 userSchema.methods.generateHash = function(password) {
