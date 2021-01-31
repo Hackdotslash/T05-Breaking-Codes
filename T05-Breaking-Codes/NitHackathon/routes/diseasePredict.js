@@ -5,10 +5,11 @@ const authToken = process.env.TWILIO_AUTH_TOKEN;
 const client = require('twilio')(accountSid, authToken);
 
 module.exports.disease_predict = (req,res,next)=> {
-    if (!comFun.NotNullUndef(req.body)) {
+    if (!comFun.NotNullUndef(req.body.Body)) {
         console.log('No Symptoms');
         res.json({success: 0, messages: "NO symptoms"})
-    } else {
+    }
+    else {
         console.log(req.body.Body);
         const input = req.body.Body;
         let inputsymp = input.split(',');
