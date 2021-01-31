@@ -23,6 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+<<<<<<< HEAD
     return DefaultTabController(
       length: 5,
       child: Scaffold(
@@ -47,6 +48,20 @@ class _HomeScreenState extends State<HomeScreen> {
                 Navigator.pushReplacement(context,
                     MaterialPageRoute(builder: (context) => LoginScreen()));
               },
+=======
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text(
+          'Home Screen',
+          style: kHeaderTextStyle,
+        ),
+        actions: [
+          RaisedButton(
+            child: Text(
+              'Log Out',
+              style: kButtonTextStyle,
+>>>>>>> 3ada0ad7e2399a554aedc1ff45a46c8336207e67
             ),
             SizedBox(
               width:10
