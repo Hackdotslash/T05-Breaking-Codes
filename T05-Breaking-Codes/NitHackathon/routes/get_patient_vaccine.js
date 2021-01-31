@@ -2,7 +2,7 @@ const vaccineM = require('../models/vaccine');
 
 module.exports.get_doc_vaccine = (req,res,next)=>{
     let docId = res.locals.userId;
-    vaccineM.find({patient:docId},function (err,data) {
+    vaccineM.find({patient:docId},{_id:0,name:1,comments:1,reminders:1},function (err,data) {
         if(err){
             console.log(err);
             res.json({success:0,message:"Mongo Error"})
