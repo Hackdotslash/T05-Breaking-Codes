@@ -5,7 +5,7 @@ module.exports.disease_predict = (req,res,next)=> {
         console.log('No Symptoms');
         res.json({success: 0, messages: "NO symptoms"})
     } else {
-
+        console.log(req.body);
         const input = req.body.symptoms;
         let inputsymp = input.split(',');
         let symptoms = [
@@ -156,16 +156,9 @@ module.exports.disease_predict = (req,res,next)=> {
         let spawn = child_process.spawn;
         let process = spawn('python3', ['./diseasePredict/main.py', sympArr])
 
-        let process1 = spawn('python3', ['./diseasePredict/main.py', '1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0\n' +
-        ',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n' +
-        '0,0,0,0,0'])
-
         process.stdout.on('data', function (data) {
             res.send(data.toString());
         })
-        // process1.stdout.on('data', function (data) {
-        //     res.send(data.toString());
-        // })
 
     }
 }
