@@ -11,5 +11,6 @@
     "eventTextField" : "Enter event name",
     "eventName" : "Event's name: ",
     "eventDescription": "Event description: ",
-    "hostDoctor" : "Host Doctor"
+    "hostDoctor" : "Host Doctor",
+    "documents": "Documents"
 }

@@ -11,5 +11,6 @@
     "eventTextField" : "ઇવેન્ટ નામ દાખલ કરો",
     "eventName" : "ઇવેન્ટનું નામ: ",
     "eventDescription": "ઘટના વર્ણન: ",
-    "hostDoctor" : "હોસ્ટ ડોક્ટર"
+    "hostDoctor" : "હોસ્ટ ડોક્ટર",
+    "documents": "દસ્તાવેજો"
 }

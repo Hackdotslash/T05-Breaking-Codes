@@ -2,6 +2,7 @@ import 'package:dotslash_hackathon/models/Language.dart';
 import 'package:dotslash_hackathon/screens/about_us_page.dart';
 import 'package:dotslash_hackathon/screens/chat_sceen.dart';
 import 'package:dotslash_hackathon/screens/doctor_info_page.dart';
+import 'package:dotslash_hackathon/screens/documents_page.dart';
 import 'package:dotslash_hackathon/screens/event_info_page.dart';
 import 'package:dotslash_hackathon/screens/login_screen.dart';
 import 'package:dotslash_hackathon/utils/constants.dart';
@@ -21,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 4,
+      length: 5,
       child: Scaffold(
         appBar: AppBar(
           title: Text(
@@ -49,21 +50,23 @@ class _HomeScreenState extends State<HomeScreen> {
               padding: EdgeInsets.all(5),
               child: DropdownButton(
                 onChanged: (Language val) {
-                  if(val.code == 'hi'){
+                  if (val.code == 'hi') {
                     context.locale = Locale('hi');
-                  } else if (val.code == 'gu'){
+                  } else if (val.code == 'gu') {
                     context.locale = Locale('gu');
                   } else {
                     context.locale = Locale('en');
                   }
                 },
                 icon: Icon(Icons.language),
-                items: Language.getLanguages().map(
-                  (e) => DropdownMenuItem(
-                    value: e,
-                    child: Text(e.name),
-                  ),
-                ).toList(),
+                items: Language.getLanguages()
+                    .map(
+                      (e) => DropdownMenuItem(
+                        value: e,
+                        child: Text(e.name),
+                      ),
+                    )
+                    .toList(),
               ),
             ),
           ],
@@ -74,7 +77,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 ? EventPage()
                 : _currentIndex == 2
                     ? ChatScreen()
-                    : AboutUs(),
+                    : _currentIndex == 3
+                        ? UploadDocuments()
+                        : AboutUs(),
         bottomNavigationBar: BottomNavigationBar(
           selectedItemColor: Colors.teal,
           unselectedItemColor: Colors.grey,
@@ -92,7 +97,10 @@ class _HomeScreenState extends State<HomeScreen> {
             BottomNavigationBarItem(
                 icon: Icon(Icons.chat), title: Text('chatText').tr()),
             BottomNavigationBarItem(
-                icon: Icon(Icons.info), title: Text('aboutText'.tr()))
+                icon: Icon(Icons.picture_as_pdf),
+                title: Text('documents').tr()),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.info), title: Text('aboutText'.tr())),
           ],
         ),
       ),
