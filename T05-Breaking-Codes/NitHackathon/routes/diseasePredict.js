@@ -1,5 +1,9 @@
 const child_process = require('child_process');
 const comFun = require('../commonFunctions');
+const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
+const client = require('twilio')(accountSid, authToken);
+
 module.exports.disease_predict = (req,res,next)=> {
     if (!comFun.NotNullUndef(req.body)) {
         console.log('No Symptoms');
@@ -157,7 +161,20 @@ module.exports.disease_predict = (req,res,next)=> {
 
         process.stdout.on('data', function (data) {
             console.log(data.toString())
-            res.json({success: 1,})
+            let message=`You are diagoned with ${data.toString()}`
+            client.messages
+                .create({
+                    from: 'whatsapp:+14155238886',
+                    body: message,
+                    to: 'whatsapp:+919820145991'
+                })
+                .then(message => {
+                    console.log(message)
+                    res.json({success: 1,})
+                })
+                .catch(err=>{
+                    console.error(err)
+            })
         })
 
     }
