@@ -27,7 +27,7 @@ module.exports.disease_predict = (req,res,next)=> {
             'muscle_wasting',
             'vomiting',
             'burning_micturition',
-            'spotting_ urination',
+            'spotting_urination',
             'fatigue',
             'weight_gain',
             'anxiety',
@@ -161,8 +161,11 @@ module.exports.disease_predict = (req,res,next)=> {
         let process = spawn('python3', ['./diseasePredict/main.py', sympArr])
 
         process.stdout.on('data', function (data) {
-            console.log(data.toString())
-            let message=`You are diagoned with ${data.toString()}`
+
+            let disease = data.toString()
+            disease = disease.slice(2,disease.length-2);
+            console.log(disease);
+            let message=`You are diagoned with ${disease}`
             client.messages
                 .create({
                     from: 'whatsapp:+14155238886',
